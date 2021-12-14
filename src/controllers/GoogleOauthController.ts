@@ -5,10 +5,10 @@ class GoogleOauthController {
     async handle(request: Request, response: Response) {
         const { code } = request.body;
 
-        const oauth = new GoogleOauthService();
+        const googleOauthService = new GoogleOauthService();
 
         try {
-            const result = await oauth.execute(code);
+            const result = await googleOauthService.execute(code);
 
             return response.json(result);
         } catch (error) {

@@ -1,11 +1,13 @@
 import { Router } from "express";
+import { CustomerApiController } from "./controllers/CustomerApiController";
 import { GoogleOauthController } from "./controllers/GoogleOauthController";
-import { PlanController } from "./controllers/PlanController";
-import { RegisterCardController } from "./controllers/RegisterCardController";
-
-const router = Router();
+import { PlanApiController } from "./controllers/PlanApiController";
+import { CardApiController } from "./controllers/CardApiController";
+import { SubscriptionApiController } from "./controllers/SubscriptionApiController";
 
 import "./database/db";
+
+const router = Router();
 
 // Google oauth
 router.get("/google/oauth", (request, response) => {
@@ -20,8 +22,13 @@ router.get("/google/callback", (request, response) => {
 
 router.post("/authorization", new GoogleOauthController().handle);
 
-router.post("/card", new RegisterCardController().handle);
+// Api Pagar.me
+router.post("/api/customer", new CustomerApiController().handle);
 
-router.post("/plan", new PlanController().handle);
+router.post("/api/card", new CardApiController().handle);
+
+router.post("/api/plan", new PlanApiController().handle);
+
+router.post("/api/subscription", new SubscriptionApiController().handle);
 
 export { router }

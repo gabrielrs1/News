@@ -31,28 +31,18 @@ class GoogleOauthService {
             }
         });
 
-        console.log(googleProfile);
-
-        const { name, picture, locale, email, id } = googleProfile.data;
+        const { name, email, picture } = googleProfile.data;
 
         const costumerService = new CustomerService();
 
         let customer = await costumerService.read(email);
 
         if(!customer) {
-            let data = {
-                external_id: id,
-                name,
-                email,
-                country: locale,
-                picture
-            }
-
-            customer = await costumerService.create(data);
+            customer = await costumerService.create(name, email, picture);
         }
 
         const token = jwt.sign({
-            name, email, locale, picture
+            name, email, picture
         },
         process.env.JWT_SECRET, {
             expiresIn: "1h"
