@@ -8,10 +8,10 @@ class CustomerApiController {
         const customerApiService = new CustomerApiService();
 
         try {
-            const customer = await customerApiService.execute(data);
+            const result = await customerApiService.execute(data);
 
-            return response.json(customer);
-        } catch(error) {
+            return response.status(200).json(result);
+        } catch (error) {
             return response.json(error);
         }
     }

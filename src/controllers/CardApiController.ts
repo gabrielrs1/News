@@ -17,7 +17,7 @@ class CardApiController {
         try {
             const result = await cardApiService.execute(card, customer_id);
 
-            return response.json(result);
+            return response.status(200).json(result);
         } catch (error) {
             return response.json(error);   
         }

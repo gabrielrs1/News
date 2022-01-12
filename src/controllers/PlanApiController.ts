@@ -8,10 +8,10 @@ class PlanApiController {
         const planApiService = new PlanApiService();
 
         try {
-            const plan = await planApiService.create(amount, days, name);
+            const result = await planApiService.create(amount, days, name);
             
-            return response.json(plan);
-        } catch(error) {
+            return response.status(200).json(result);
+        } catch (error) {
             return response.json(error);
         }
     }

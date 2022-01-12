@@ -4,20 +4,20 @@ import { CustomerService } from "./CustomerService";
 import * as jwt from "jsonwebtoken";
 
 type GoogleUserProfile = {
-    id: string;
     name: string;
-    locale: string;
-    picture: string;
     email: string;
+    picture: string;
 }
 
 class GoogleOauthService {
     async execute(code: string) {
-        const { data } = await axios.post("https://oauth2.googleapis.com/token", encode({
-            code: code,
+        const url = "https://oauth2.googleapis.com/token";
+
+        const { data } = await axios.post(url, encode({
+            code: decodeURIComponent(code),
             client_id: process.env.GOOGLE_CLIENT_ID,
             client_secret: process.env.GOOGLE_CLIENT_SECRET,
-            redirect_uri: "http://localhost:3000/google/callback",
+            redirect_uri: "http://localhost:3000",
             grant_type: "authorization_code",
         }), {
             headers: {
@@ -31,18 +31,20 @@ class GoogleOauthService {
             }
         });
 
-        const { name, email, picture } = googleProfile.data;
+        const {name, email, picture } = googleProfile.data;
 
         const costumerService = new CustomerService();
 
         let customer = await costumerService.read(email);
-
+        
         if(!customer) {
             customer = await costumerService.create(name, email, picture);
         }
 
+        const id = customer._id.toString();
+        
         const token = jwt.sign({
-            name, email, picture
+            id, name, email, picture
         },
         process.env.JWT_SECRET, {
             expiresIn: "1h"

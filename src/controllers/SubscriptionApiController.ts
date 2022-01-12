@@ -8,9 +8,9 @@ class SubscriptionApiController {
         const subscriptionApiService = new SubscriptionApiService();
 
         try {
-            const subscription = await subscriptionApiService.execute(data);
+            const result = await subscriptionApiService.execute(data);
 
-            return response.json(subscription);
+            return response.status(200).json(result);
         } catch (error) {
             return response.json(error);
         }
