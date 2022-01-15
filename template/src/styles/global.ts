@@ -9,6 +9,8 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     body, html {
+        overflow: hidden;
+
         width: 100vw;
         height: 100vh;
 

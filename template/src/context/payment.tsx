@@ -1,5 +1,6 @@
-import { createContext, ReactNode } from "react";
+import { createContext, ReactNode, useContext } from "react";
 import { api } from "../services/api";
+import { ModalContext } from "./modal";
 
 type PaymentContextData = {
     subscription: (props: Object) => void;
@@ -30,8 +31,10 @@ type PaymentProvider = {
 }
 
 export function PaymentProvider(props: PaymentProvider) {
+    const { setScroll } = useContext(ModalContext);
     async function subscription(customer: PaymentCustomer) {
-        const result = await api.post("api/customer", {
+
+        const pgCustomer = await api.post("api/customer", {
             name: customer.name,
             email: customer.email,
             external_id: customer.id,
@@ -48,21 +51,21 @@ export function PaymentProvider(props: PaymentProvider) {
             ]
         });
 
-        const result1 = await api.post("api/card", {
+        const pgCard = await api.post("api/card", {
             card_number: customer.cardNumber,
             card_holder_name: customer.cardName,
             card_expiration_date: customer.cardValidity,
             card_cvv: customer.cardCVV,
-            customer_id: String(result.data.id)
+            customer_id: String(pgCustomer.data.id)
         });
 
-        const result2 = await api.post("api/subscription", {
+        const pgSubscription = await api.post("api/subscription", {
             plan_id: "701470",
             card_number: customer.cardNumber,
             card_holder_name: customer.cardName,
             card_expiration_date: customer.cardValidity,
             card_cvv: customer.cardCVV,
-            card_id: result1.data.id,
+            card_id: pgCard.data.id,
             customer: {
                 name: customer.name,
                 email: customer.email,
@@ -80,7 +83,11 @@ export function PaymentProvider(props: PaymentProvider) {
             }
         });
 
-        console.log(result2);
+        console.log("aqui")
+
+        if(pgSubscription.data.status == "paid") {
+            setScroll(true)
+        }
     }
 
     return (
