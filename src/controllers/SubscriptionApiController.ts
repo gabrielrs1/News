@@ -1,11 +1,11 @@
 import { Request, Response } from "express";
-import { SubscriptionApiService } from "../services/SubscriptionApiService";
+import { SubscriptionService } from "../services/Pagarme/SubscriptionService";
 
 class SubscriptionApiController {
     async handle(request: Request, response: Response) {
         const data = request.body;
 
-        const subscriptionApiService = new SubscriptionApiService();
+        const subscriptionApiService = new SubscriptionService();
 
         try {
             const result = await subscriptionApiService.execute(data);

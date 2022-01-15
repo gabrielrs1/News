@@ -1,5 +1,5 @@
 import pagarme from "pagarme";
-import { CustomerService } from "./CustomerService";
+import { CustomerService } from "../CustomerService";
 
 type SubscriptionData = {
     plan_id: number;
@@ -22,7 +22,7 @@ type SubscriptionData = {
     }
 }
 
-class SubscriptionApiService {
+class SubscriptionService {
     async execute(data: SubscriptionData) {
         const connectApi = await pagarme.client.connect({ api_key: process.env.PAGARME_CLIENT_SECRET });
         
@@ -61,4 +61,4 @@ class SubscriptionApiService {
     }
 }
 
-export { SubscriptionApiService }
+export { SubscriptionService }

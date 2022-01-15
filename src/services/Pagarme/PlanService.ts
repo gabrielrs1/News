@@ -1,6 +1,6 @@
 import pagarme from "pagarme";
 
-class PlanApiService {
+class PlanService {
     async create(amount: number, days: string, name: string) {
         const connectApi = await pagarme.client.connect({ api_key: process.env.PAGARME_CLIENT_SECRET });
         
@@ -14,4 +14,4 @@ class PlanApiService {
     }
 }
 
-export { PlanApiService }
+export { PlanService }

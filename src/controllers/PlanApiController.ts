@@ -1,11 +1,11 @@
 import { Request, Response } from "express";
-import { PlanApiService } from "../services/PlanApiService";
+import { PlanService } from "../services/Pagarme/PlanService";
 
 class PlanApiController {
     async handle(request: Request, response: Response) {
         const { amount, days, name } = request.body;
 
-        const planApiService = new PlanApiService();
+        const planApiService = new PlanService();
 
         try {
             const result = await planApiService.create(amount, days, name);

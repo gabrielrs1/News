@@ -7,7 +7,7 @@ type CardData = {
     card_cvv: string;
 }
 
-class CardApiService {
+class CardService {
     async execute(card: CardData, customer_id: string) {
         const hash = await pagarme.client.connect({ encryption_key: process.env.PAGARME_ENCRYPTION_KEY });
 
@@ -33,4 +33,4 @@ class CardApiService {
     }
 }
 
-export { CardApiService }
+export { CardService }

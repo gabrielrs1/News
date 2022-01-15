@@ -15,7 +15,7 @@ type CustomerApi = {
    ];
 }
 
-class CustomerApiService {
+class CustomerService {
     async execute(data: CustomerApi) {
         const connectApi = await pagarme.client.connect({ api_key: process.env.PAGARME_CLIENT_SECRET });
 
@@ -38,4 +38,4 @@ class CustomerApiService {
     }
 }
 
-export { CustomerApiService }
+export { CustomerService }

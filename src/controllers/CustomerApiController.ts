@@ -1,11 +1,11 @@
 import { Request, Response } from "express";
-import { CustomerApiService } from "../services/CustomerApiService";
+import { CustomerService } from "../services/Pagarme/CustomerService";
 
 class CustomerApiController {
     async handle(request: Request, response: Response) {
         const data = request.body;
 
-        const customerApiService = new CustomerApiService();
+        const customerApiService = new CustomerService();
 
         try {
             const result = await customerApiService.execute(data);

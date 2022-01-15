@@ -36,18 +36,20 @@ class GoogleOauthService {
         const costumerService = new CustomerService();
 
         let customer = await costumerService.read(email);
-        
+
         if(!customer) {
             customer = await costumerService.create(name, email, picture);
         }
 
         const id = customer._id.toString();
+        const signature = false;
+        const signatureID = "";
         
         const token = jwt.sign({
-            id, name, email, picture
+            id, name, email, picture, signature, signatureID
         },
         process.env.JWT_SECRET, {
-            expiresIn: "1h"
+            expiresIn: "1d"
         });
 
         return { customer, token };

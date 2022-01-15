@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { CardApiService } from "../services/CardApiService";
+import { CardService } from "../services/Pagarme/CardService";
 
 class CardApiController {
     async handle(request: Request, response: Response) {
@@ -12,7 +12,7 @@ class CardApiController {
             card_cvv,
         }
 
-        const cardApiService = new CardApiService();
+        const cardApiService = new CardService();
 
         try {
             const result = await cardApiService.execute(card, customer_id);
