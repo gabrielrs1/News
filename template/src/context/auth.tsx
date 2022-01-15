@@ -1,11 +1,14 @@
-import { createContext, ReactNode, useEffect, useState } from "react";
+import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 import { api } from "../services/api";
+import { ModalContext } from "./modal";
 
 type User = {
     _id: string;
     name: string;
     email: string;
     picture: string;
+    signature: boolean;
+    signatureID: string;
 }
 
 type AuthContextData = {
@@ -27,10 +30,14 @@ type AuthResponse = {
         name: string;
         picture: string;
         email: string;
+        signature: boolean;
+        signatureID: string;
     }
 }
 
 export function AuthProvider(props: AuthProvider) {
+    const { setScroll } = useContext(ModalContext);
+
     const [user, setUser] = useState<User | null>(null);
 
     const googleUrl = "https://accounts.google.com/o/oauth2/v2/auth?redirect_uri=http://localhost:3000&prompt=consent&response_type=code&client_id=157801454638-ifqndn3rpp2ils6ovh9f1537f0jr80np.apps.googleusercontent.com&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile&access_type=offline";
@@ -47,12 +54,18 @@ export function AuthProvider(props: AuthProvider) {
         api.defaults.headers.common.authorization = `Bearer ${token}`;
         
         setUser(customer);
+
+        if(customer.signature){
+            setScroll(true);
+        }
     }
 
     function signOut() {
         setUser(null);
 
         localStorage.removeItem("newtoken");
+
+        setScroll(false);
     }
 
     useEffect(() => {
@@ -63,6 +76,10 @@ export function AuthProvider(props: AuthProvider) {
 
             api.get<User>("profile").then(response => {
                 setUser(response.data);
+
+                if(response.data.signature) {
+                    setScroll(true);
+                }
             });
         }
     },[]);

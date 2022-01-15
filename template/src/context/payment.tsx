@@ -32,8 +32,8 @@ type PaymentProvider = {
 
 export function PaymentProvider(props: PaymentProvider) {
     const { setScroll } = useContext(ModalContext);
-    async function subscription(customer: PaymentCustomer) {
 
+    async function subscription(customer: PaymentCustomer) {
         const pgCustomer = await api.post("api/customer", {
             name: customer.name,
             email: customer.email,
@@ -82,8 +82,6 @@ export function PaymentProvider(props: PaymentProvider) {
                 }
             }
         });
-
-        console.log("aqui")
 
         if(pgSubscription.data.status == "paid") {
             setScroll(true)
