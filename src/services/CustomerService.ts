@@ -23,6 +23,19 @@ class CustomerService {
 
         return customer;
     }
+
+    async signature(email?: string, signatureID?: string, signature?: boolean, ) {
+        const customerModel = model("customer", CustomerSchema);
+
+        const customer = await customerModel.findOneAndUpdate({ email }, {
+            signature,
+            signatureID
+        }, {
+            new: true
+        });
+
+        return customer;
+    }
 }
 
 export { CustomerService }

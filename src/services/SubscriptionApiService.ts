@@ -1,4 +1,5 @@
 import pagarme from "pagarme";
+import { CustomerService } from "./CustomerService";
 
 type SubscriptionData = {
     plan_id: number;
@@ -45,6 +46,16 @@ class SubscriptionApiService {
                 }
             }
         });
+
+        if(subscription.status == "paid") {
+            const customerService = new CustomerService();
+
+            let email = subscription.customer.email;
+            let signature = true;
+            let signatureID = subscription.id;
+
+            await customerService.signature(email, signatureID, signature);
+        }
 
         return subscription;
     }
