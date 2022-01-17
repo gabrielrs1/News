@@ -59,6 +59,14 @@ class SubscriptionService {
 
         return subscription;
     }
+
+    async delete(id: string) {
+        const connectApi = await pagarme.client.connect({ api_key: process.env.PAGARME_CLIENT_SECRET });
+
+        const subscription = await connectApi.subscriptions.cancel({ id });
+
+        return subscription
+    }
 }
 
 export { SubscriptionService }
