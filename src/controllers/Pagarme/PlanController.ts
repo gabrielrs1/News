@@ -1,14 +1,14 @@
 import { Request, Response } from "express";
-import { PlanService } from "../services/Pagarme/PlanService";
+import { PlanService } from "../../services/Pagarme/PlanService";
 
-class PlanApiController {
+class PlanController {
     async handle(request: Request, response: Response) {
         const { amount, days, name } = request.body;
 
-        const planApiService = new PlanService();
+        const planService = new PlanService();
 
         try {
-            const result = await planApiService.create(amount, days, name);
+            const result = await planService.create(amount, days, name);
             
             return response.status(200).json(result);
         } catch (error) {
@@ -17,4 +17,4 @@ class PlanApiController {
     }
 }
 
-export { PlanApiController }
+export { PlanController }

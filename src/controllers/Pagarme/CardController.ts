@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import { CardService } from "../services/Pagarme/CardService";
+import { CardService } from "../../services/Pagarme/CardService";
 
-class CardApiController {
+class CardController {
     async handle(request: Request, response: Response) {
         const { card_number, card_holder_name, card_expiration_date, card_cvv, customer_id } = request.body;
         
@@ -12,10 +12,10 @@ class CardApiController {
             card_cvv,
         }
 
-        const cardApiService = new CardService();
+        const cardService = new CardService();
 
         try {
-            const result = await cardApiService.execute(card, customer_id);
+            const result = await cardService.execute(card, customer_id);
 
             return response.status(200).json(result);
         } catch (error) {
@@ -24,4 +24,4 @@ class CardApiController {
     }
 }
 
-export { CardApiController }
+export { CardController }

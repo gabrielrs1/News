@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { CustomerService } from "../services/CustomerService";
-import { ProfileService } from "../services/ProfileService";
 
 class ProfileController {
     async handle(request: Request, response: Response) {

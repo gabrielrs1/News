@@ -1,14 +1,14 @@
 import { Request, Response } from "express";
-import { CustomerService } from "../services/Pagarme/CustomerService";
+import { CustomerService } from "../../services/Pagarme/CustomerService";
 
-class CustomerApiController {
+class CustomerController {
     async handle(request: Request, response: Response) {
         const data = request.body;
 
-        const customerApiService = new CustomerService();
+        const customerService = new CustomerService();
 
         try {
-            const result = await customerApiService.execute(data);
+            const result = await customerService.execute(data);
 
             return response.status(200).json(result);
         } catch (error) {
@@ -17,4 +17,4 @@ class CustomerApiController {
     }
 }
 
-export { CustomerApiController }
+export { CustomerController }
