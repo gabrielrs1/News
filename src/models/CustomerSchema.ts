@@ -6,6 +6,8 @@ interface Custumer {
     picture: string;
     signature: boolean;
     signatureID: string;
+    admin: boolean;
+    created_at: number;
 }
 
 const CustomerSchema = new Schema<Custumer>({
@@ -13,7 +15,11 @@ const CustomerSchema = new Schema<Custumer>({
     email: String,
     picture: String,
     signature: Boolean,
-    signatureID: String
+    signatureID: String,
+    admin: Boolean,
+    created_at: Number
+}, {
+    timestamps: { currentTime: () => Math.floor(Date.now() / 1000) }
 });
 
 export { CustomerSchema }

@@ -16,11 +16,13 @@ class CustomerService {
         return customer;
     }
 
-    async read(email: string) {
+    async read(id?: string, email?: string) {
         const customerModel = model("customer", CustomerSchema);
 
-        const customer = await customerModel.findOne({ email });
+        const data = id || email;
 
+        const customer = await customerModel.findOne({ data });
+        
         return customer;
     }
 

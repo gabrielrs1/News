@@ -1,15 +1,16 @@
+import "./database/db";
+
 import { Router } from "express";
 
-import { CustomerApiController } from "./controllers/CustomerApiController";
+import { CustomerController } from "./controllers/Pagarme/CustomerController";
 import { GoogleOauthController } from "./controllers/GoogleOauthController";
-import { PlanApiController } from "./controllers/PlanApiController";
-import { CardApiController } from "./controllers/CardApiController";
-import { SubscriptionApiController } from "./controllers/SubscriptionApiController";
+import { PlanController } from "./controllers/Pagarme/PlanController";
+import { CardController } from "./controllers/Pagarme/CardController";
+import { SubscriptionController } from "./controllers/Pagarme/SubscriptionController";
 import { ProfileController } from "./controllers/ProfileController";
+import { NewsletterControler } from "./controllers/NewsletterController";
 
 import { authenticated } from "./middleware/authenticated";
-
-import "./database/db";
 
 const router = Router();
 
@@ -30,12 +31,17 @@ router.post("/authorization", new GoogleOauthController().handle);
 router.get("/profile", authenticated, new ProfileController().handle);
 
 // Api Pagar.me
-router.post("/api/customer", new CustomerApiController().handle);
+router.post("/api/customer", authenticated, new CustomerController().handle);
 
-router.post("/api/card", new CardApiController().handle);
+router.post("/api/card", authenticated, new CardController().handle);
 
-router.post("/api/plan", new PlanApiController().handle);
+router.post("/api/plan", authenticated, new PlanController().handle);
 
-router.post("/api/subscription", new SubscriptionApiController().handle);
+router.post("/api/subscription", authenticated, new SubscriptionController().handle);
+
+router.post("/api/subscription/delete", authenticated, new SubscriptionController().handleDelete);
+
+// Newsletter
+router.post("/newsletter", authenticated, new NewsletterControler().handle);
 
 export { router }

@@ -3,6 +3,7 @@ import * as jwt from "jsonwebtoken";
 
 interface IPayload {
     email: string;
+    id: string;
 }
 
 export function authenticated(request: Request, response: Response, next: NextFunction) {
@@ -21,9 +22,10 @@ export function authenticated(request: Request, response: Response, next: NextFu
 
     try {
         // Recebe o parametro sub do verify
-        const { email } = jwt.verify(token, process.env.JWT_SECRET) as IPayload;
+        const  { email, id }  = jwt.verify(token, process.env.JWT_SECRET) as IPayload;
 
         // Adiciona ao request do express o user_id para poder receber em outros lugares
+        request.id = id;
         request.email = email;
         
         return next();
