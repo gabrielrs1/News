@@ -17,19 +17,27 @@ export const BoxContent = styled.div<ScrollProps>`
 
     button {
         display: ${(props) => props.scroll ? "none"  : "" };
-        position: absolute;
+        position: fixed;
         top: 50%;
+        z-index: 1;
 
         font-size: 20px;
-        border: 1px solid #fff;
+        font-weight: 600;
+        border: 0;
         border-radius: 10px;
         padding: 10px 20px;
         cursor: pointer;
+        color: #fff;
+        background: #06005c;
+
+        &:hover {
+            filter: drop-shadow(0px 0px 2px #000);
+        }
     }
 `;
 
 export const Content = styled.div<ScrollProps>`
-    margin-top: 40px;
+    margin-top: 150px;
     text-align: justify;
 
     filter: ${(props) => props.scroll ? "blur(0px)"  : "blur(5px)"};

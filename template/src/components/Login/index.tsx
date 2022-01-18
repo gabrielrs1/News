@@ -11,8 +11,8 @@ function Login() {
         <>
             {user ? (
                 <GoogleSignout onClick={signOut}>
-                    <FcGoogle />
-                    <p>{ user.name }</p>
+                    <img className="avatar" src={user.picture} alt="Avatar" />
+                    <p>{user.name}</p>
                 </GoogleSignout>
             ) : (
                 <GoogleOauth href={googleUrl}>

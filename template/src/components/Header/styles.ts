@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 export const BoxContent = styled.div`
     width: 100%;
-    height: 8vh;
-    background: #4a4a4a;
+    position: fixed;
+    background: #00000054;
     padding: 0 1rem;
 
     div {
@@ -11,13 +11,14 @@ export const BoxContent = styled.div`
         height: 100%;
         margin: auto;
 
+        padding: 10px 0;
+
         display: flex;
         justify-content: space-between;
         align-items: center;
     
         img {
-            border-radius: 50px;
-            width: 75px;
+            width: 54px;
             height: 54px;
         }
 
@@ -33,7 +34,8 @@ export const BoxContent = styled.div`
                 cursor: pointer;
 
                 &:hover {
-                    filter: brightness(0.9);
+                    filter: drop-shadow(0px 0px 2px #fff);
+                    font-size: 1.1rem;
                 }
             }
         }

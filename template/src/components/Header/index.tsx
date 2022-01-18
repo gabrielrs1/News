@@ -4,7 +4,7 @@ import Login from "../Login";
 
 import { BoxContent } from "./styles"
 
-import LogoImg from "../../image/N.png"
+import LogoImg from "../../image/new.png"
 
 function Header() {
     return (

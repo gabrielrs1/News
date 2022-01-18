@@ -14,7 +14,7 @@ import { authenticated } from "./middleware/authenticated";
 
 const router = Router();
 
-// Google oauth
+// Google Oauth
 router.get("/google/oauth", (request, response) => {
     response.redirect(`https://accounts.google.com/o/oauth2/v2/auth?redirect_uri=http://localhost:4000/google/callback&prompt=consent&response_type=code&client_id=${process.env.GOOGLE_CLIENT_ID}&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile&access_type=offline`);
 });
@@ -43,5 +43,7 @@ router.post("/api/subscription/delete", authenticated, new SubscriptionControlle
 
 // Newsletter
 router.post("/newsletter", authenticated, new NewsletterControler().handle);
+
+router.get("/newsletter", authenticated, new NewsletterControler().handleRead);
 
 export { router }

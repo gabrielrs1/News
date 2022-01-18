@@ -22,6 +22,14 @@ class NewsletterService {
 
         return newsletter;
     }
+
+    async read(id: string) {
+        const newsletterModel = model("newsletter", NewsletterSchema);
+
+        const newsletter = await newsletterModel.findById(id);
+        
+        return newsletter
+    }
 }
 
 export { NewsletterService }
