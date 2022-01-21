@@ -3,13 +3,13 @@ import { NewsletterService } from "../services/NewsletterService";
 
 class NewsletterControler {
     async handle(request: Request, response: Response) {
-        const { id } = request;
+        const { email } = request;
         const { text } = request.body;
 
         const newsletterService = new NewsletterService();
         
         try {
-            const newsletter = await newsletterService.execute(text, id);
+            const newsletter = await newsletterService.execute(text, email);
 
             return response.status(200).json(newsletter);
         } catch (error) {

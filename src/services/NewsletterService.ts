@@ -3,10 +3,10 @@ import { NewsletterSchema } from "../models/NewsletterSchema"
 import { CustomerService } from "./CustomerService";
 
 class NewsletterService {
-    async execute(text: string, id: string) {
+    async execute(text: string, email: string) {
         const customerService = new CustomerService();
 
-        const customer = await customerService.read(id);
+        const customer = await customerService.read(email);
 
         if(!customer.admin) {
             return "Access denied!";
