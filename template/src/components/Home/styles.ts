@@ -5,6 +5,7 @@ export const BoxContent = styled.main`
     height: 100vh;
 
     display: flex;
+
     justify-content: center;
     align-items: center;
 
@@ -38,7 +39,7 @@ export const BoxContent = styled.main`
             padding: 10px 20px;
             cursor: pointer;
             color: #fff;
-            background: #06005c;
+            background: #0f0f0fc5;
 
             &:hover {
                 filter: drop-shadow(0px 0px 2px #000);
@@ -47,13 +48,15 @@ export const BoxContent = styled.main`
     }
 
     img {
-        width: 450px;
+        width: 600px;
+        margin-right: -100px;
         border-radius: 20px;
     }
 
     @media(max-width: 1078px) {
         img {
-            width: 350px;
+            width: 450px;
+            margin-right: -50px;
         }
     }
 

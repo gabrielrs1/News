@@ -1,18 +1,13 @@
 import styled from "styled-components";
 
 export const BoxContent = styled.div`
-    input {
-        width: 100%;
-        height: 45px;
-        border-radius: 10px;
-        border: 1px solid #b3b3b3;
-        margin-bottom: 20px;
-        padding: 0 10px 0 10px;
-        font-size: 18px;
-
+    form {
+        display: flex;
+        flex-direction: column;
     }
-    
+
     button {
+        margin-top: 50px;
         font-size: 15px;
         font-weight: 600;
         border: 0;
@@ -20,7 +15,7 @@ export const BoxContent = styled.div`
         padding: 10px 20px;
         cursor: pointer;
         color: #fff;
-        background: #06005c;
+        background: #0f0f0fc5;
 
         &:hover {
             filter: drop-shadow(0px 0px 2px #000);

@@ -5,6 +5,7 @@ export const BoxContent = styled.div`
     position: fixed;
     background: #00000054;
     padding: 0 1rem;
+    z-index: 10;
 
     div {
         max-width: 1200px;
@@ -38,6 +39,10 @@ export const BoxContent = styled.div`
                     font-size: 1.1rem;
                 }
             }
+        }
+
+        svg {
+            fill: #fff;
         }
     }
 `;

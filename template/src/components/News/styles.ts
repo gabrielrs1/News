@@ -28,7 +28,7 @@ export const BoxContent = styled.div<ScrollProps>`
         padding: 10px 20px;
         cursor: pointer;
         color: #fff;
-        background: #06005c;
+        background: #0f0f0fc5;
 
         &:hover {
             filter: drop-shadow(0px 0px 2px #000);
@@ -37,7 +37,7 @@ export const BoxContent = styled.div<ScrollProps>`
 `;
 
 export const Content = styled.div<ScrollProps>`
-    margin-top: 150px;
+    margin-top: 120px;
     text-align: justify;
 
     filter: ${(props) => props.scroll ? "blur(0px)"  : "blur(5px)"};

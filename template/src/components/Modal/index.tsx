@@ -6,6 +6,8 @@ import { AuthContext } from "../../context/auth";
 import { ModalContext } from "../../context/modal";
 import { BoxContent } from "./styles";
 
+import { TextField } from '@mui/material';
+
 function ModalComponent() {
     const { subscription } = useContext(PaymentContext);
     const { user } = useContext(AuthContext);
@@ -79,7 +81,7 @@ function ModalComponent() {
     useEffect(() => {
         if(stage == 4) {
         setStage(1);
-        
+
         subscription(data);
         
         setData({});
@@ -96,10 +98,10 @@ function ModalComponent() {
             <BoxContent>
                 { stage == 1 && (
                 <form onSubmit={handleSubmitUser}>
-                    <input type="text" name="name" value={name} placeholder="Nome" onChange={event => setName(event.target.value)} />
-                    <input type="text" name="email" value={email} placeholder="Email" onChange={event => setEmail(event.target.value)} />
-                    <input type="text" name="phone" value={phone} placeholder="Telefone" onChange={event => setPhone(event.target.value)} />
-                    <input type="text" name="cpf" value={cpf} placeholder="CPF" onChange={event => setCpf(event.target.value)} />
+                    <TextField id="standard-basic" margin="dense" label="Nome" variant="standard" name="name" value={name} onChange={event => setName(event.target.value)} />
+                    <TextField id="standard-basic" margin="dense" label="Email" variant="standard" name="email" value={email} onChange={event => setEmail(event.target.value)} />
+                    <TextField id="standard-basic" margin="dense" label="Telefone" variant="standard" name="phone" value={phone} onChange={event => setPhone(event.target.value)} />
+                    <TextField id="standard-basic" margin="dense" label="CPF" variant="standard" name="cpf" value={cpf} onChange={event => setCpf(event.target.value)} />
 
                     <button type="submit">Enviar</button>
                 </form>
@@ -107,12 +109,12 @@ function ModalComponent() {
 
                 { stage == 2 && (
                 <form onSubmit={handleSubmitAddress}>
-                    <input type="text" name="cep" value={cep} placeholder="CEP" onChange={event => setCep(event.target.value)} />
-                    <input type="text" name="street" value={street} placeholder="Rua" onChange={event => setStreet(event.target.value)} />
-                    <input type="text" name="number" value={number} placeholder="Número" onChange={event => setNumber(event.target.value)} />
-                    <input type="text" name="neighborhood" value={neighborhood} placeholder="Bairro" onChange={event => setNeighborhood(event.target.value)} />
-                    <input type="text" name="city" value={city} placeholder="Cidade" onChange={event => setCity(event.target.value)} />
-                    <input type="text" name="uf" value={uf} placeholder="UF" onChange={event => setUf(event.target.value)} />
+                    <TextField id="standard-basic" margin="dense" label="CEP" variant="standard" name="cep" value={cep} onChange={event => setCep(event.target.value)} />
+                    <TextField id="standard-basic" margin="dense" label="Rua" variant="standard" name="street" value={street} onChange={event => setStreet(event.target.value)} />
+                    <TextField id="standard-basic" margin="dense" label="Número" variant="standard" name="number" value={number} onChange={event => setNumber(event.target.value)} />
+                    <TextField id="standard-basic" margin="dense" label="Bairro" variant="standard" name="neighborhood" value={neighborhood} onChange={event => setNeighborhood(event.target.value)} />
+                    <TextField id="standard-basic" margin="dense" label="Cidade" variant="standard" name="city" value={city} onChange={event => setCity(event.target.value)} />
+                    <TextField id="standard-basic" margin="dense" label="UF" variant="standard" name="uf" value={uf} onChange={event => setUf(event.target.value)} />
 
                     <button type="submit">Enviar</button>
                 </form>
@@ -120,10 +122,10 @@ function ModalComponent() {
 
                 { stage == 3 && (
                 <form onSubmit={handleSubmitCard}>
-                    <input type="text" name="cardNumber" value={cardNumber} placeholder="Número" onChange={event => setCardNumber(event.target.value)} />
-                    <input type="text" name="cardName" value={cardName} placeholder="Nome (igual no cartão)" onChange={event => setCardName(event.target.value)} />
-                    <input type="text" name="cardValidity" value={cardValidity} placeholder="Validade" onChange={event => setCardValidity(event.target.value)} />
-                    <input type="text" name="cardCVV" value={cardCVV} placeholder="CVV" onChange={event => setCardCVV(event.target.value)} />
+                    <TextField id="standard-basic" margin="dense" label="Número" variant="standard" name="cardNumber" value={cardNumber} onChange={event => setCardNumber(event.target.value)} />
+                    <TextField id="standard-basic" margin="dense" label="Nome (igual no cartão)" variant="standard" name="cardName" value={cardName} onChange={event => setCardName(event.target.value)} />
+                    <TextField id="standard-basic" margin="dense" label="Validade" variant="standard" name="cardValidity" value={cardValidity} onChange={event => setCardValidity(event.target.value)} />
+                    <TextField id="standard-basic" margin="dense" label="CVV" variant="standard" name="cardCVV" value={cardCVV} onChange={event => setCardCVV(event.target.value)} />
 
                     <button type="submit">Enviar</button>
                 </form>

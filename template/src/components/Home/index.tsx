@@ -1,6 +1,6 @@
 import Header from "../Header";
 import { BoxContent } from "./styles";
-import img from "../../image/new.png";
+import img from "../../image/home.svg";
 import ModalComponent from "../Modal";
 import { useContext } from "react";
 import { ModalContext } from "../../context/modal";
@@ -24,7 +24,7 @@ function Home() {
                     <ModalComponent />
                 </div>
 
-                <img src={img} alt="" />
+                <img src={img} alt="home" />
             </div>
         </BoxContent>
     </>

@@ -9,6 +9,9 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     body, html {
+        overflow-y: scroll;
+        overflow-x: hidden;
+
         width: 100vw;
         
         background: linear-gradient(50deg, rgba(0,0,0,.3), rgba(241,241,241,.4) 40%),

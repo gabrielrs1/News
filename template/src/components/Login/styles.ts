@@ -12,6 +12,7 @@ export const GoogleOauth = styled.a`
     color: #ffffff;
     cursor: pointer;
     text-decoration: none;
+    margin-right: 10px;
 
     svg {
         font-size: 1.6rem;
@@ -41,6 +42,7 @@ export const GoogleSignout = styled.button`
     color: #ffffff;
     cursor: pointer;
     text-decoration: none;
+    margin-right: 10px;
 
     svg {
         font-size: 1.6rem;
