@@ -1,2 +1,2 @@
-# Practicing-Payment
+# News
 Use API Pagar.me
