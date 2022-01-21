@@ -60,12 +60,16 @@ class SubscriptionService {
         return subscription;
     }
 
-    async delete(id: string) {
+    async delete(id: string, email: string) {
+        const customerService = new CustomerService();
+
         const connectApi = await pagarme.client.connect({ api_key: process.env.PAGARME_CLIENT_SECRET });
 
         const subscription = await connectApi.subscriptions.cancel({ id });
 
-        return subscription
+        await customerService.signature(email, "", false);
+
+        return subscription;
     }
 }
 

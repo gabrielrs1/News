@@ -1,6 +1,7 @@
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 import { api } from "../services/api";
 import { ModalContext } from "./modal";
+import { UnsubscribeContext } from "./unsubscribe";
 
 type User = {
     _id: string;
@@ -37,6 +38,7 @@ type AuthResponse = {
 
 export function AuthProvider(props: AuthProvider) {
     const { setScroll } = useContext(ModalContext);
+    const { setPaid, setSignatureID } = useContext(UnsubscribeContext);
 
     const [user, setUser] = useState<User | null>(null);
 
@@ -52,11 +54,11 @@ export function AuthProvider(props: AuthProvider) {
         localStorage.setItem("newtoken", token);
         
         api.defaults.headers.common.authorization = `Bearer ${token}`;
-        
         setUser(customer);
 
         if(customer.signature){
             setScroll(true);
+            setPaid(true);
         }
     }
 
@@ -66,6 +68,7 @@ export function AuthProvider(props: AuthProvider) {
         localStorage.removeItem("newtoken");
 
         setScroll(false);
+        setPaid(false);
     }
 
     useEffect(() => {
@@ -79,6 +82,8 @@ export function AuthProvider(props: AuthProvider) {
 
                 if(response.data.signature) {
                     setScroll(true);
+                    setPaid(true);
+                    setSignatureID(response.data.signatureID)
                 }
             });
         }

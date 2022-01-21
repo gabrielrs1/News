@@ -18,11 +18,12 @@ class SubscriptionController {
 
     async handleDelete(request: Request, response: Response) {
         const { id } = request.body;
+        const { email } = request;
 
         const subscriptionService = new SubscriptionService();
 
         try {
-            const result = await subscriptionService.delete(id);
+            const result = await subscriptionService.delete(id, email);
 
             return response.status(200).json(result);
         } catch (error) {

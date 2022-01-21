@@ -1,12 +1,17 @@
 import { Link } from "react-router-dom";
+import { IconButton } from "@mui/material";
+import { RiCloseLine } from "react-icons/ri";
 
 import Login from "../Login";
 
 import { BoxContent } from "./styles"
-
 import LogoImg from "../../image/new.png"
+import { useContext } from "react";
+import { UnsubscribeContext } from "../../context/unsubscribe";
 
 function Header() {
+    const { paid, unsubscribe} = useContext(UnsubscribeContext);
+
     return (
         <BoxContent>
             <div>
@@ -18,6 +23,12 @@ function Header() {
                 </div>
 
                 <Login />
+
+                {paid && (
+                    <IconButton aria-label="delete" title="Cancelar inscrição" onClick={unsubscribe}>
+                        <RiCloseLine />
+                    </IconButton>
+                )}
             </div>
         </BoxContent>
     );
