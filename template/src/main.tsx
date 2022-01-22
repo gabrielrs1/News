@@ -4,19 +4,19 @@ import App from './App';
 import { AuthProvider } from './context/auth';
 import { ModalProvider } from './context/modal';
 import { PaymentProvider } from './context/payment';
-import { UnsubscribeProvider } from './context/unsubscribe';
+import { SubscribeProvider } from './context/subscribe';
 
 ReactDOM.render(
   <React.StrictMode>
-    <ModalProvider>
-      <UnsubscribeProvider>
+    <SubscribeProvider>
+      <ModalProvider>
         <AuthProvider>
           <PaymentProvider>
             <App />
           </PaymentProvider>
         </AuthProvider>
-      </UnsubscribeProvider>
-    </ModalProvider>
+      </ModalProvider>
+    </SubscribeProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

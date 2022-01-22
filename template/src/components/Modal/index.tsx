@@ -7,11 +7,13 @@ import { ModalContext } from "../../context/modal";
 import { BoxContent } from "./styles";
 
 import { TextField } from '@mui/material';
+import { SubscribeContext } from "../../context/subscribe";
 
 function ModalComponent() {
     const { subscription } = useContext(PaymentContext);
     const { user } = useContext(AuthContext);
     const { closeModal, modalIsOpen } = useContext(ModalContext);
+    const { paid } = useContext(SubscribeContext);
 
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -94,42 +96,48 @@ function ModalComponent() {
         onRequestClose={closeModal}
         className="react-modal-content"
         overlayClassName="react-modal-overlay"
-        >
+        >   
             <BoxContent>
-                { stage == 1 && (
-                <form onSubmit={handleSubmitUser}>
-                    <TextField id="standard-basic" margin="dense" label="Nome" variant="standard" name="name" value={name} onChange={event => setName(event.target.value)} />
-                    <TextField id="standard-basic" margin="dense" label="Email" variant="standard" name="email" value={email} onChange={event => setEmail(event.target.value)} />
-                    <TextField id="standard-basic" margin="dense" label="Telefone" variant="standard" name="phone" value={phone} onChange={event => setPhone(event.target.value)} />
-                    <TextField id="standard-basic" margin="dense" label="CPF" variant="standard" name="cpf" value={cpf} onChange={event => setCpf(event.target.value)} />
+                {paid ? (
+                    <p>Você já tem uma assinatura</p>
+                ) : (
+                    <>
+                        { stage == 1 && (
+                            <form onSubmit={handleSubmitUser}>
+                                <TextField id="standard-basic" margin="dense" label="Nome" variant="standard" name="name" value={name} onChange={event => setName(event.target.value)} />
+                                <TextField id="standard-basic" margin="dense" label="Email" variant="standard" name="email" value={email} onChange={event => setEmail(event.target.value)} />
+                                <TextField id="standard-basic" margin="dense" label="Telefone" variant="standard" name="phone" value={phone} onChange={event => setPhone(event.target.value)} />
+                                <TextField id="standard-basic" margin="dense" label="CPF" variant="standard" name="cpf" value={cpf} onChange={event => setCpf(event.target.value)} />
 
-                    <button type="submit">Enviar</button>
-                </form>
-                ) }
+                                <button type="submit">Enviar</button>
+                            </form>
+                            ) }
 
-                { stage == 2 && (
-                <form onSubmit={handleSubmitAddress}>
-                    <TextField id="standard-basic" margin="dense" label="CEP" variant="standard" name="cep" value={cep} onChange={event => setCep(event.target.value)} />
-                    <TextField id="standard-basic" margin="dense" label="Rua" variant="standard" name="street" value={street} onChange={event => setStreet(event.target.value)} />
-                    <TextField id="standard-basic" margin="dense" label="Número" variant="standard" name="number" value={number} onChange={event => setNumber(event.target.value)} />
-                    <TextField id="standard-basic" margin="dense" label="Bairro" variant="standard" name="neighborhood" value={neighborhood} onChange={event => setNeighborhood(event.target.value)} />
-                    <TextField id="standard-basic" margin="dense" label="Cidade" variant="standard" name="city" value={city} onChange={event => setCity(event.target.value)} />
-                    <TextField id="standard-basic" margin="dense" label="UF" variant="standard" name="uf" value={uf} onChange={event => setUf(event.target.value)} />
+                            { stage == 2 && (
+                            <form onSubmit={handleSubmitAddress}>
+                                <TextField id="standard-basic" margin="dense" label="CEP" variant="standard" name="cep" value={cep} onChange={event => setCep(event.target.value)} />
+                                <TextField id="standard-basic" margin="dense" label="Rua" variant="standard" name="street" value={street} onChange={event => setStreet(event.target.value)} />
+                                <TextField id="standard-basic" margin="dense" label="Número" variant="standard" name="number" value={number} onChange={event => setNumber(event.target.value)} />
+                                <TextField id="standard-basic" margin="dense" label="Bairro" variant="standard" name="neighborhood" value={neighborhood} onChange={event => setNeighborhood(event.target.value)} />
+                                <TextField id="standard-basic" margin="dense" label="Cidade" variant="standard" name="city" value={city} onChange={event => setCity(event.target.value)} />
+                                <TextField id="standard-basic" margin="dense" label="UF" variant="standard" name="uf" value={uf} onChange={event => setUf(event.target.value)} />
 
-                    <button type="submit">Enviar</button>
-                </form>
-                ) }
+                                <button type="submit">Enviar</button>
+                            </form>
+                            ) }
 
-                { stage == 3 && (
-                <form onSubmit={handleSubmitCard}>
-                    <TextField id="standard-basic" margin="dense" label="Número" variant="standard" name="cardNumber" value={cardNumber} onChange={event => setCardNumber(event.target.value)} />
-                    <TextField id="standard-basic" margin="dense" label="Nome (igual no cartão)" variant="standard" name="cardName" value={cardName} onChange={event => setCardName(event.target.value)} />
-                    <TextField id="standard-basic" margin="dense" label="Validade" variant="standard" name="cardValidity" value={cardValidity} onChange={event => setCardValidity(event.target.value)} />
-                    <TextField id="standard-basic" margin="dense" label="CVV" variant="standard" name="cardCVV" value={cardCVV} onChange={event => setCardCVV(event.target.value)} />
+                            { stage == 3 && (
+                            <form onSubmit={handleSubmitCard}>
+                                <TextField id="standard-basic" margin="dense" label="Número" variant="standard" name="cardNumber" value={cardNumber} onChange={event => setCardNumber(event.target.value)} />
+                                <TextField id="standard-basic" margin="dense" label="Nome (igual no cartão)" variant="standard" name="cardName" value={cardName} onChange={event => setCardName(event.target.value)} />
+                                <TextField id="standard-basic" margin="dense" label="Validade" variant="standard" name="cardValidity" value={cardValidity} onChange={event => setCardValidity(event.target.value)} />
+                                <TextField id="standard-basic" margin="dense" label="CVV" variant="standard" name="cardCVV" value={cardCVV} onChange={event => setCardCVV(event.target.value)} />
 
-                    <button type="submit">Enviar</button>
-                </form>
-                ) }
+                                <button type="submit">Enviar</button>
+                            </form>
+                        )}
+                    </>
+                )}
             </BoxContent>
         </Modal>
     );

@@ -1,7 +1,7 @@
 import { createContext, ReactNode, useContext } from "react";
 import { api } from "../services/api";
 import { ModalContext } from "./modal";
-import { UnsubscribeContext } from "./unsubscribe";
+import { SubscribeContext } from "./subscribe";
 
 type PaymentContextData = {
     subscription: (props: Object) => void;
@@ -33,7 +33,7 @@ type PaymentProvider = {
 
 export function PaymentProvider(props: PaymentProvider) {
     const { setScroll } = useContext(ModalContext);
-    const { setPaid, setSignatureID } = useContext(UnsubscribeContext);
+    const { setPaid, setSignatureID } = useContext(SubscribeContext);
 
     async function subscription(customer: PaymentCustomer) {
         const pgCustomer = await api.post("api/customer", {
@@ -90,7 +90,6 @@ export function PaymentProvider(props: PaymentProvider) {
             setPaid(true);
             setSignatureID(pgSubscription.data.id);
         }
-
     }
 
     return (

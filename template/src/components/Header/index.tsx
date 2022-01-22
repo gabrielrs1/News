@@ -7,10 +7,10 @@ import Login from "../Login";
 import { BoxContent } from "./styles"
 import LogoImg from "../../image/new.png"
 import { useContext } from "react";
-import { UnsubscribeContext } from "../../context/unsubscribe";
+import { SubscribeContext } from "../../context/subscribe";
 
 function Header() {
-    const { paid, unsubscribe} = useContext(UnsubscribeContext);
+    const { paid, unsubscribe} = useContext(SubscribeContext);
 
     return (
         <BoxContent>
