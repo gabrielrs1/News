@@ -1,34 +1,16 @@
-import { model } from "mongoose"
-import { NewsletterSchema } from "../models/NewsletterSchema"
-import { CustomerService } from "./CustomerService";
+import NewsAPI from "newsapi";
 
 class NewsletterService {
-    async execute(text: string, email: string) {
-        const customerService = new CustomerService();
+    async execute() {
+        const newsapi = new NewsAPI(process.env.NEWS_API);
 
-        const customer = await customerService.read(email);
-
-        if(!customer.admin) {
-            return "Access denied!";
-        }
-
-        const newsletterModel = model("newsletter", NewsletterSchema);
-
-        const createNewsletter = await newsletterModel.create({
-            text
+        const news = await newsapi.v2.topHeadlines({
+            category: 'technology',
+            language: 'pt',
+            country: 'br'
         });
 
-        const newsletter = createNewsletter.save();
-
-        return newsletter;
-    }
-
-    async read(id: string) {
-        const newsletterModel = model("newsletter", NewsletterSchema);
-
-        const newsletter = await newsletterModel.findById(id);
-        
-        return newsletter
+        return news;
     }
 }
 

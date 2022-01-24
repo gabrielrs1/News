@@ -14,6 +14,7 @@
     "hbs": "^4.2.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.0.13",
+    "newsapi": "^2.4.1",
     "pagarme": "^4.20.1"
   },
   "devDependencies": {
