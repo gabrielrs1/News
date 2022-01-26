@@ -42,6 +42,6 @@ router.post("/api/subscription", authenticated, new SubscriptionController().han
 router.post("/api/subscription/delete", authenticated, new SubscriptionController().handleDelete);
 
 // Newsletter
-router.get("/newsletter", new NewsletterControler().handle);
+router.post("/newsletter", new NewsletterControler().handle);
 
 export { router }

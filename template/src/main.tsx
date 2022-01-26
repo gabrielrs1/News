@@ -8,15 +8,15 @@ import { SubscribeProvider } from './context/subscribe';
 
 ReactDOM.render(
   <React.StrictMode>
-    <SubscribeProvider>
-      <ModalProvider>
+    <ModalProvider>
+      <SubscribeProvider>
         <AuthProvider>
           <PaymentProvider>
             <App />
           </PaymentProvider>
         </AuthProvider>
-      </ModalProvider>
-    </SubscribeProvider>
+      </SubscribeProvider>
+    </ModalProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

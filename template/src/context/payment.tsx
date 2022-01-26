@@ -1,5 +1,6 @@
 import { createContext, ReactNode, useContext } from "react";
 import { api } from "../services/api";
+import { AuthContext } from "./auth";
 import { ModalContext } from "./modal";
 import { SubscribeContext } from "./subscribe";
 
@@ -15,7 +16,6 @@ type PaymentCustomer = {
     cep: string;
     city: string;
     cpf: string;
-    email: string;
     id: string;
     name: string;
     neighborhood: string;
@@ -34,11 +34,12 @@ type PaymentProvider = {
 export function PaymentProvider(props: PaymentProvider) {
     const { setScroll } = useContext(ModalContext);
     const { setPaid, setSignatureID } = useContext(SubscribeContext);
+    const { user } = useContext(AuthContext);
 
     async function subscription(customer: PaymentCustomer) {
         const pgCustomer = await api.post("api/customer", {
             name: customer.name,
-            email: customer.email,
+            email: user.email,
             external_id: customer.id,
             type: "individual",
             country: "br",
@@ -70,7 +71,7 @@ export function PaymentProvider(props: PaymentProvider) {
             card_id: pgCard.data.id,
             customer: {
                 name: customer.name,
-                email: customer.email,
+                email: user.email,
                 document_number: customer.cpf,
                 address: {
                         neighborhood: customer.neighborhood, 

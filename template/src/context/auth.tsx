@@ -16,6 +16,16 @@ type AuthContextData = {
     googleUrl: string;
     user: User | null;
     signOut: () => void;
+    news: Array<NewsArticle>;
+}
+
+type NewsArticle = {
+    author: string;
+    title: string;
+    description: string;
+    content: string;
+    publishedAt: string;
+    url: string
 }
 
 export const AuthContext = createContext({} as AuthContextData);
@@ -38,9 +48,10 @@ type AuthResponse = {
 
 export function AuthProvider(props: AuthProvider) {
     const { setScroll } = useContext(ModalContext);
-    const { setPaid, setSignatureID } = useContext(SubscribeContext);
+    const { setPaid, setSignatureID, paid } = useContext(SubscribeContext);
 
     const [user, setUser] = useState<User | null>(null);
+    const [news, setNews] = useState<Array<NewsArticle>>([]);
 
     const googleUrl = "https://accounts.google.com/o/oauth2/v2/auth?redirect_uri=http://localhost:3000&prompt=consent&response_type=code&client_id=157801454638-ifqndn3rpp2ils6ovh9f1537f0jr80np.apps.googleusercontent.com&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile&access_type=offline";
     
@@ -60,6 +71,7 @@ export function AuthProvider(props: AuthProvider) {
         if(customer.signature){
             setScroll(true);
             setPaid(true);
+            setSignatureID(customer.signatureID);
         }
     }
 
@@ -84,11 +96,19 @@ export function AuthProvider(props: AuthProvider) {
                 if(response.data.signature) {
                     setScroll(true);
                     setPaid(true);
-                    setSignatureID(response.data.signatureID)
+                    setSignatureID(response.data.signatureID);
                 }
             });
         }
     },[]);
+
+    useEffect(() => {
+        api.post("newsletter", {
+            pageSize: paid ? "15" : "3" 
+        }).then(res => {
+            setNews(res.data.articles);
+        });
+    }, [paid]);
 
     useEffect(() => {
         const url = window.location.href;
@@ -109,7 +129,7 @@ export function AuthProvider(props: AuthProvider) {
     },[]);
 
     return (
-        <AuthContext.Provider value={{ googleUrl, user, signOut }}>
+        <AuthContext.Provider value={{ googleUrl, user, signOut, news }}>
             {props.children}
         </AuthContext.Provider>
     );

@@ -1,13 +1,14 @@
 import NewsAPI from "newsapi";
 
 class NewsletterService {
-    async execute() {
+    async execute(pageSize: string) {
         const newsapi = new NewsAPI(process.env.NEWS_API);
 
         const news = await newsapi.v2.topHeadlines({
             category: 'technology',
             language: 'pt',
-            country: 'br'
+            country: 'br',
+            pageSize,
         });
 
         return news;

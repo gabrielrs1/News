@@ -15,6 +15,10 @@ export const BoxContent = styled.div<ScrollProps>`
     
     padding: 0px 20px;
 
+    div {
+        margin: 60px 0 40px 0;
+    }
+
     button {
         display: ${(props) => props.scroll ? "none"  : "" };
         position: fixed;
@@ -37,7 +41,6 @@ export const BoxContent = styled.div<ScrollProps>`
 `;
 
 export const Content = styled.div<ScrollProps>`
-    margin-top: 120px;
     text-align: justify;
 
     filter: ${(props) => props.scroll ? "blur(0px)"  : "blur(5px)"};
@@ -47,8 +50,29 @@ export const Content = styled.div<ScrollProps>`
     }
 
     p {
-        margin-top: 5px;
+        margin-top: 15px;
+        font-size: 1.1rem;
     }
-
     
+    .info {
+        margin: 0;
+        display: flex;
+        justify-content: space-between;
+    
+        span {
+            display: block;
+            margin-top: 8px;
+            font-size: 0.85rem;
+            color: #0009;
+        }
+
+        a { 
+            margin-top: 4px;
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
 `;
