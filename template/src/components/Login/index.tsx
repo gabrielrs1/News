@@ -10,12 +10,12 @@ function Login() {
     return (
         <>
             {user ? (
-                <GoogleSignout onClick={signOut}>
-                    <img className="avatar" src={user.picture} alt="Avatar" />
+                <GoogleSignout onClick={signOut} title="Sair">
+                    <img className="avatar" src={user.picture} />
                     <p>{user.name}</p>
                 </GoogleSignout>
             ) : (
-                <GoogleOauth href={googleUrl}>
+                <GoogleOauth href={googleUrl} title="Entrar">
                     <FcGoogle />
                     <p>Google</p>
                 </GoogleOauth>

@@ -1,22 +1,26 @@
 import { FormEvent, useContext, useEffect, useState } from "react";
+
 import Modal from "react-modal";
+
+import PhoneInput from 'react-phone-input-2'
+import 'react-phone-input-2/lib/material.css'
 
 import { PaymentContext } from "../../context/payment";
 import { AuthContext } from "../../context/auth";
 import { ModalContext } from "../../context/modal";
-import { BoxContent } from "./styles";
-
-import { TextField } from '@mui/material';
 import { SubscribeContext } from "../../context/subscribe";
+
+import { BoxContent } from "./styles";
+import { TextField } from '@mui/material';
+import { cepApi } from "../../services/cep";
 
 function ModalComponent() {
     const { subscription } = useContext(PaymentContext);
     const { user } = useContext(AuthContext);
-    const { closeModal, modalIsOpen } = useContext(ModalContext);
+    const { closeModal, modalIsOpen, stage, setStage } = useContext(ModalContext);
     const { paid } = useContext(SubscribeContext);
 
     const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
     const [cpf, setCpf] = useState("");
 
@@ -32,17 +36,25 @@ function ModalComponent() {
     const [cardValidity, setCardValidity] = useState("");
     const [cardCVV, setCardCVV] = useState("");
     
-    const [stage, setStage] = useState(1);
-
     const [data, setData] = useState({});
+
+    function searchCEP() {
+        if(cep.length == 8) {
+            cepApi.get(`${cep}/json`).then(result => {
+                setStreet(result.data.logradouro);
+                setCity(result.data.localidade);
+                setUf(result.data.uf);
+                setNeighborhood(result.data.bairro);
+            });
+        }
+    }
 
     function handleSubmitUser(event: FormEvent) {
         event.preventDefault();
-
+        
         setData({
         id: user._id,
         name,
-        email,
         phone,
         cpf
         });
@@ -89,7 +101,7 @@ function ModalComponent() {
         setData({});
         }
     }, [stage]);
-
+    
     return (
         <Modal
         isOpen={modalIsOpen}
@@ -105,8 +117,8 @@ function ModalComponent() {
                         { stage == 1 && (
                             <form onSubmit={handleSubmitUser}>
                                 <TextField id="standard-basic" margin="dense" label="Nome" variant="standard" name="name" value={name} onChange={event => setName(event.target.value)} />
-                                <TextField id="standard-basic" margin="dense" label="Email" variant="standard" name="email" value={email} onChange={event => setEmail(event.target.value)} />
-                                <TextField id="standard-basic" margin="dense" label="Telefone" variant="standard" name="phone" value={phone} onChange={event => setPhone(event.target.value)} />
+                                <TextField id="standard-basic" margin="dense" label="Email" variant="standard" value={user?.email} disabled className="email" />
+                                <PhoneInput country={'br'} value={phone} onChange={phone => setPhone(phone)} inputClass="phone" masks={{br: '(..) .....-....'}} placeholder="+00 (00) 0000-0000" />
                                 <TextField id="standard-basic" margin="dense" label="CPF" variant="standard" name="cpf" value={cpf} onChange={event => setCpf(event.target.value)} />
 
                                 <button type="submit">Enviar</button>
@@ -115,7 +127,7 @@ function ModalComponent() {
 
                             { stage == 2 && (
                             <form onSubmit={handleSubmitAddress}>
-                                <TextField id="standard-basic" margin="dense" label="CEP" variant="standard" name="cep" value={cep} onChange={event => setCep(event.target.value)} />
+                                <TextField id="standard-basic" margin="dense" label="CEP" variant="standard" name="cep" value={cep} onBlur={searchCEP} onChange={event => setCep(event.target.value)} />
                                 <TextField id="standard-basic" margin="dense" label="Rua" variant="standard" name="street" value={street} onChange={event => setStreet(event.target.value)} />
                                 <TextField id="standard-basic" margin="dense" label="Número" variant="standard" name="number" value={number} onChange={event => setNumber(event.target.value)} />
                                 <TextField id="standard-basic" margin="dense" label="Bairro" variant="standard" name="neighborhood" value={neighborhood} onChange={event => setNeighborhood(event.target.value)} />

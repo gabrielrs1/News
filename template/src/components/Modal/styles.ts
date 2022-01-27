@@ -4,6 +4,16 @@ export const BoxContent = styled.div`
     form {
         display: flex;
         flex-direction: column;
+
+        .special-label {
+            left: 1px;
+            background: 0;
+            color: rgba(0, 0, 0, 0.38);
+            font-weight: 400;
+            font-size: 13px;
+            padding: 0;
+            position: absolute;
+        }
     }
 
     p {
@@ -15,7 +25,30 @@ export const BoxContent = styled.div`
         border-radius: 10px;
 
         width: 300px;
-        /* font-size: 20px; */
+    }
+
+    .email {
+        margin-bottom: 23px;
+    }
+
+    .phone {
+        width: 100%;
+        height: 1.4375em;
+        background: none;
+        outline: none;
+        border: none;
+        border-bottom: 1px solid #0006;
+        border-radius: 0px;
+
+        &:focus {
+            border: none;
+            border-bottom: 2px solid #1976d2;
+            box-shadow: none;
+        }
+
+        &:hover {
+            border-bottom: 2px solid #000;
+        }
     }
 
     button {
