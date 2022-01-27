@@ -2,6 +2,8 @@ import { FormEvent, useContext, useEffect, useState } from "react";
 
 import Modal from "react-modal";
 
+import ReactLoading from "react-loading";
+
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/material.css'
 
@@ -51,11 +53,11 @@ function ModalComponent() {
 
     function handleSubmitUser(event: FormEvent) {
         event.preventDefault();
-        
+
         setData({
         id: user._id,
         name,
-        phone,
+        phone: "+" + phone,
         cpf
         });
 
@@ -94,11 +96,11 @@ function ModalComponent() {
 
     useEffect(() => {
         if(stage == 4) {
-        setStage(1);
+            setStage(1);
 
-        subscription(data);
-        
-        setData({});
+            subscription(data);
+            
+            setData({});
         }
     }, [stage]);
     
@@ -110,9 +112,11 @@ function ModalComponent() {
         overlayClassName="react-modal-overlay"
         >   
             <BoxContent>
-                {paid ? (
+                {paid && (
                     <p>Você já tem uma assinatura</p>
-                ) : (
+                )}
+
+                {!paid && (
                     <>
                         { stage == 1 && (
                             <form onSubmit={handleSubmitUser}>
@@ -123,9 +127,9 @@ function ModalComponent() {
 
                                 <button type="submit">Enviar</button>
                             </form>
-                            ) }
+                        )}
 
-                            { stage == 2 && (
+                        { stage == 2 && (
                             <form onSubmit={handleSubmitAddress}>
                                 <TextField id="standard-basic" margin="dense" label="CEP" variant="standard" name="cep" value={cep} onBlur={searchCEP} onChange={event => setCep(event.target.value)} />
                                 <TextField id="standard-basic" margin="dense" label="Rua" variant="standard" name="street" value={street} onChange={event => setStreet(event.target.value)} />
@@ -136,9 +140,9 @@ function ModalComponent() {
 
                                 <button type="submit">Enviar</button>
                             </form>
-                            ) }
+                        )}
 
-                            { stage == 3 && (
+                        { stage == 3 && (
                             <form onSubmit={handleSubmitCard}>
                                 <TextField id="standard-basic" margin="dense" label="Número" variant="standard" name="cardNumber" value={cardNumber} onChange={event => setCardNumber(event.target.value)} />
                                 <TextField id="standard-basic" margin="dense" label="Nome (igual no cartão)" variant="standard" name="cardName" value={cardName} onChange={event => setCardName(event.target.value)} />

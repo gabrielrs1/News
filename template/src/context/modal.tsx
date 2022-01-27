@@ -28,7 +28,6 @@ export function ModalProvider(props: AuthProvider) {
 
     function closeModal() {
         setIsOpen(false);
-        setStage(1)
     }
 
     return (
