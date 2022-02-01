@@ -14,10 +14,10 @@ export const GlobalStyle = createGlobalStyle`
 
         width: 100vw;
         
-        background: linear-gradient(50deg, rgba(0,0,0,.3), rgba(241,241,241,.4) 40%),
-                    linear-gradient(140deg, rgba(0,0,0,.3), rgba(241,241,241,.4) 40%),
-                    linear-gradient(220deg, rgba(0,0,0,.3), rgba(241,241,241,.4) 40%),
-                    linear-gradient(310deg, rgba(0,0,0,.3), rgba(241,241,241,.4) 40%);
+        background: linear-gradient(50deg, rgba(0,0,0,.1), rgba(241,241,241,.4) 40%),
+                    linear-gradient(140deg, rgba(0,0,0,.1), rgba(241,241,241,.4) 40%),
+                    linear-gradient(220deg, rgba(0,0,0,.1), rgba(241,241,241,.4) 40%),
+                    linear-gradient(310deg, rgba(0,0,0,.1), rgba(241,241,241,.4) 40%);
         background-repeat: no-repeat;
     }
 

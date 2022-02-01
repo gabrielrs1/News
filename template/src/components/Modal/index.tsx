@@ -2,8 +2,6 @@ import { FormEvent, useContext, useEffect, useState } from "react";
 
 import Modal from "react-modal";
 
-import ReactLoading from "react-loading";
-
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/material.css'
 

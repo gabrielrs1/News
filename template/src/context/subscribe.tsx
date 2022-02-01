@@ -2,6 +2,8 @@ import { createContext, Dispatch, ReactNode, SetStateAction, useContext, useStat
 import { api } from "../services/api";
 import { ModalContext } from "./modal";
 
+import { toast } from 'react-toastify';
+
 type SubscribeContextData = {
     paid: boolean;
     setPaid: Dispatch<SetStateAction<boolean>>;
@@ -21,6 +23,16 @@ export function SubscribeProvider(props: SubscribeProvider) {
     const [paid, setPaid] = useState(false);
     const [signatureID, setSignatureID] = useState("");
 
+    const notify = (msg: string) => toast.warn(msg, {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+    });
+
     async function unsubscribe() {
         const response = await api.post("api/subscription/delete", {
             id: signatureID
@@ -29,6 +41,8 @@ export function SubscribeProvider(props: SubscribeProvider) {
         if(response) {
             setPaid(false);
             setScroll(false);
+
+            notify("Inscrição cancelada!")
         }
     }
 

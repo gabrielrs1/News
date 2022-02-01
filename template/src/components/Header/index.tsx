@@ -1,13 +1,13 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { IconButton } from "@mui/material";
 import { RiCloseLine } from "react-icons/ri";
 
+import { SubscribeContext } from "../../context/subscribe";
 import Login from "../Login";
 
 import { BoxContent } from "./styles"
 import LogoImg from "../../image/new.png"
-import { useContext } from "react";
-import { SubscribeContext } from "../../context/subscribe";
 
 function Header() {
     const { paid, unsubscribe} = useContext(SubscribeContext);

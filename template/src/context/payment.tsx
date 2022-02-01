@@ -3,6 +3,7 @@ import { api } from "../services/api";
 import { AuthContext } from "./auth";
 import { ModalContext } from "./modal";
 import { SubscribeContext } from "./subscribe";
+import { toast } from 'react-toastify';
 
 type PaymentContextData = {
     subscription: (props: Object) => void;
@@ -35,6 +36,16 @@ export function PaymentProvider(props: PaymentProvider) {
     const { setScroll } = useContext(ModalContext);
     const { setPaid, setSignatureID } = useContext(SubscribeContext);
     const { user } = useContext(AuthContext);
+
+    const notify = (msg: string) => toast.success(msg, {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+    });
 
     async function subscription(customer: PaymentCustomer) {
         const pgCustomer = await api.post("api/customer", {
@@ -90,6 +101,8 @@ export function PaymentProvider(props: PaymentProvider) {
             setScroll(true);
             setPaid(true);
             setSignatureID(pgSubscription.data.id);
+
+            notify("Pagamento realizado!")
         }
     }
 

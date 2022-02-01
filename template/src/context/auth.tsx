@@ -2,6 +2,7 @@ import { createContext, ReactNode, useContext, useEffect, useState } from "react
 import { api } from "../services/api";
 import { ModalContext } from "./modal";
 import { SubscribeContext } from "./subscribe";
+import { toast } from 'react-toastify';
 
 type User = {
     _id: string;
@@ -55,6 +56,16 @@ export function AuthProvider(props: AuthProvider) {
 
     const googleUrl = "https://accounts.google.com/o/oauth2/v2/auth?redirect_uri=http://localhost:3000&prompt=consent&response_type=code&client_id=157801454638-ifqndn3rpp2ils6ovh9f1537f0jr80np.apps.googleusercontent.com&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile&access_type=offline";
     
+    const notify = (msg: string) => toast.success(msg, {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+    });
+    
     async function signIn(code: string) {
         const response = await api.post<AuthResponse>("authorization", {
             code: code
@@ -67,6 +78,8 @@ export function AuthProvider(props: AuthProvider) {
         api.defaults.headers.common.authorization = `Bearer ${token}`;
         
         setUser(customer);
+
+        notify("Login realizado!");
 
         if(customer.signature){
             setScroll(true);
@@ -82,6 +95,8 @@ export function AuthProvider(props: AuthProvider) {
 
         setScroll(false);
         setPaid(false);
+
+        notify("Logout realizado!");
     }
 
     useEffect(() => {
