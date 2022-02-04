@@ -33,7 +33,7 @@
 
 ### Google
 ```
-Obter client id e client secret
+Obter client id e client secret:
 
 https://developers.google.com/identity/protocols/oauth2/javascript-implicit-flow#creatingcred
 
@@ -57,6 +57,17 @@ https://beta.dashboard.sandbox.pagar.me/
 ```
 Obter news api:
 
-Crie uma conta:
 https://newsapi.org/
+```
+
+### Start application
+```
+  # Na raiz do projeto template/src/context/auth.tsx
+  Encontre a variável clientId e preencha com o CLIENT_ID do Google
+  
+  # No terminal
+  yarn dev
+  
+  # No terminal - cd template
+  yarn dev
 ```
