@@ -1,7 +1,6 @@
 # News
 
 <div>
-  <img aligh=top src="https://user-images.githubusercontent.com/59850458/152454191-9c522136-b02b-41e6-ba5a-d9cbfee95bb2.png" width="800px" height="450px" />
-  <img aligh=top src="https://user-images.githubusercontent.com/59850458/152454218-ddd24edb-71d1-4cf8-be24-b8d6b087d87e.png" width="800px" height="450px" />
-  <img aligh=top src="https://user-images.githubusercontent.com/59850458/152454225-844f2963-20ce-4028-b16d-d85f360f925c.png" width="800px" height="450px" />
+  <img aligh=top src="https://user-images.githubusercontent.com/59850458/152455463-be282a67-44ee-40ce-b2cc-caaa5e4ae993.png" width="500px" />
+  <img aligh=top src="https://user-images.githubusercontent.com/59850458/152455440-174cd908-6f0f-4a8b-acf3-eba6d2c47a92.png" width="500px" />
 </div>
