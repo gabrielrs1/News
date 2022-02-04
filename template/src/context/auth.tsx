@@ -54,7 +54,10 @@ export function AuthProvider(props: AuthProvider) {
     const [user, setUser] = useState<User | null>(null);
     const [news, setNews] = useState<Array<NewsArticle>>([]);
 
-    const googleUrl = "https://accounts.google.com/o/oauth2/v2/auth?redirect_uri=http://localhost:3000&prompt=consent&response_type=code&client_id=157801454638-ifqndn3rpp2ils6ovh9f1537f0jr80np.apps.googleusercontent.com&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile&access_type=offline";
+    
+    const clientId = "";
+
+    const googleUrl = `https://accounts.google.com/o/oauth2/v2/auth?redirect_uri=http://localhost:3000&prompt=consent&response_type=code&client_id=${clientId}&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile&access_type=offline`;
     
     const notify = (msg: string) => toast.success(msg, {
         position: "top-right",
