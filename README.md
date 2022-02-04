@@ -27,3 +27,36 @@
 
   NEWS_API=
 ```
+
+#### Vamos precisar preencher as variáveis do google, pagarme e newsapi
+#### Segue abaixo:
+
+### Google
+```
+Obter client id e client secret
+
+https://developers.google.com/identity/protocols/oauth2/javascript-implicit-flow#creatingcred
+
+Após entrar no Google Cloud Plataform:
+
+1 - Criar tela de permissão Oauth
+
+2 - Segue o tutorial do link normalmente.
+
+* Utilizar o URI http://localhost:3000
+```
+### Pagar.me
+
+```
+Obter encryption key e client secret:
+
+https://beta.dashboard.sandbox.pagar.me/
+```
+### News API
+
+```
+Obter news api:
+
+Crie uma conta:
+https://newsapi.org/
+```
