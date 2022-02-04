@@ -119,7 +119,7 @@ export function AuthProvider(props: AuthProvider) {
 
     useEffect(() => {
         api.post("newsletter", {
-            pageSize: paid ? "30" : "3" 
+            pageSize: paid ? "30" : "4" 
         }).then(res => {
             setNews(res.data.articles);
         });
