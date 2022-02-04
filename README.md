@@ -9,29 +9,21 @@
 ```
   # Clone do repositório
   git clone https://github.com/gabrielrs1/News.git
-```
-  
-</code>
 
-#### Raiz do projeto
-<code>
+  # Raiz do projeto
   yarn
-</code>
 
-#### No terminal digite: cd Template
-<code>
+  # No terminal digite: cd Template
   yarn
-</code>
 
-#### Crie na raiz do projeto um .env com as seguintes informações:
-<code>
+  # Crie na raiz do projeto um .env com as seguintes informações:
   GOOGLE_CLIENT_ID=
   GOOGLE_CLIENT_SECRET=
 
   JWT_SECRET=applicationnewsletter
 
-  PAGARME_ENCRYPTION_KEY=
+  PAGARME_ENCRYPTION_KEY=   
   PAGARME_CLIENT_SECRET=
 
   NEWS_API=
-</code>
+```
