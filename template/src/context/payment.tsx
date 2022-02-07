@@ -33,10 +33,11 @@ type PaymentProvider = {
 }
 
 export function PaymentProvider(props: PaymentProvider) {
-    const { setScroll } = useContext(ModalContext);
+    const { setScreenLock } = useContext(ModalContext);
     const { setPaid, setSignatureID } = useContext(SubscribeContext);
     const { user } = useContext(AuthContext);
 
+    // Notification
     const notify = (msg: string) => toast.success(msg, {
         position: "top-right",
         autoClose: 3000,
@@ -98,7 +99,7 @@ export function PaymentProvider(props: PaymentProvider) {
         });
 
         if(pgSubscription.data.status == "paid") {
-            setScroll(true);
+            setScreenLock(true);
             setPaid(true);
             setSignatureID(pgSubscription.data.id);
 

@@ -16,7 +16,7 @@ type CustomerApi = {
 }
 
 class CustomerService {
-    async execute(data: CustomerApi) {
+    async create(data: CustomerApi) {
         const connectApi = await pagarme.client.connect({ api_key: process.env.PAGARME_CLIENT_SECRET });
 
         const createCustomer = await connectApi.customers.create({

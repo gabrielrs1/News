@@ -16,7 +16,7 @@ class CustomerService {
         return customer;
     }
 
-    async read(email: string) {
+    async query(email: string) {
         const customerModel = model("customer", CustomerSchema);
 
         const customer = await customerModel.findOne({ email });

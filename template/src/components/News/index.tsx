@@ -7,21 +7,21 @@ import ModalComponent from "../Modal";
 import { BoxContent, Content } from "./styles";
 
 function News() {
-    const { openModal, scroll } = useContext(ModalContext);
+    const { openModal, screenLock } = useContext(ModalContext);
     const { news } = useContext(AuthContext);
 
     return (
         <>
             <Header/>
             
-            <BoxContent scroll={scroll}>
+            <BoxContent screenLock={screenLock}>
                 <button onClick={openModal}>Assine!</button>
 
                 <ModalComponent />
 
                 <div>
                     {news.map((article, index) => (
-                        <Content scroll={scroll} key={index}>
+                        <Content screenLock={screenLock} key={index}>
                             <h1>{article.title}</h1>
 
                             <p>{article.description}</p>

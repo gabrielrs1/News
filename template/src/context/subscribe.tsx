@@ -18,11 +18,12 @@ type SubscribeProvider = {
 }
 
 export function SubscribeProvider(props: SubscribeProvider) {
-    const { setScroll } = useContext(ModalContext);
+    const { setScreenLock } = useContext(ModalContext);
 
     const [paid, setPaid] = useState(false);
     const [signatureID, setSignatureID] = useState("");
 
+    // Notification
     const notify = (msg: string) => toast.warn(msg, {
         position: "top-right",
         autoClose: 3000,
@@ -40,7 +41,7 @@ export function SubscribeProvider(props: SubscribeProvider) {
 
         if(response) {
             setPaid(false);
-            setScroll(false);
+            setScreenLock(false);
 
             notify("Inscrição cancelada!")
         }

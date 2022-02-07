@@ -8,7 +8,7 @@ class SubscriptionController {
         const subscriptionService = new SubscriptionService();
 
         try {
-            const result = await subscriptionService.execute(data);
+            const result = await subscriptionService.create(data);
 
             return response.status(200).json(result);
         } catch (error) {

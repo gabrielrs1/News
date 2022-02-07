@@ -48,17 +48,17 @@ type AuthResponse = {
 }
 
 export function AuthProvider(props: AuthProvider) {
-    const { setScroll } = useContext(ModalContext);
+    const { setScreenLock } = useContext(ModalContext);
     const { setPaid, setSignatureID, paid } = useContext(SubscribeContext);
 
     const [user, setUser] = useState<User | null>(null);
     const [news, setNews] = useState<Array<NewsArticle>>([]);
 
-    
     const clientId = "";
 
     const googleUrl = `https://accounts.google.com/o/oauth2/v2/auth?redirect_uri=http://localhost:3000&prompt=consent&response_type=code&client_id=${clientId}&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile&access_type=offline`;
     
+    // Notification
     const notify = (msg: string) => toast.success(msg, {
         position: "top-right",
         autoClose: 3000,
@@ -69,6 +69,7 @@ export function AuthProvider(props: AuthProvider) {
         progress: undefined,
     });
     
+    // Login google
     async function signIn(code: string) {
         const response = await api.post<AuthResponse>("authorization", {
             code: code
@@ -85,23 +86,25 @@ export function AuthProvider(props: AuthProvider) {
         notify("Login realizado!");
 
         if(customer.signature){
-            setScroll(true);
+            setScreenLock(true);
             setPaid(true);
             setSignatureID(customer.signatureID);
         }
     }
 
+    // Logout
     function signOut() {
         setUser(null);
 
         localStorage.removeItem("newtoken");
 
-        setScroll(false);
+        setScreenLock(false);
         setPaid(false);
 
         notify("Logout realizado!");
     }
 
+    // Query customer profile
     useEffect(() => {
         const token = localStorage.getItem("newtoken");
 
@@ -112,7 +115,7 @@ export function AuthProvider(props: AuthProvider) {
                 setUser(response.data);
 
                 if(response.data.signature) {
-                    setScroll(true);
+                    setScreenLock(true);
                     setPaid(true);
                     setSignatureID(response.data.signatureID);
                 }
@@ -120,6 +123,7 @@ export function AuthProvider(props: AuthProvider) {
         }
     },[]);
 
+    // News
     useEffect(() => {
         api.post("newsletter", {
             pageSize: paid ? "30" : "4" 
@@ -128,6 +132,7 @@ export function AuthProvider(props: AuthProvider) {
         });
     }, [paid]);
 
+    // Get and extracts code of url
     useEffect(() => {
         const url = window.location.href;
 

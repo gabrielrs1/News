@@ -8,7 +8,7 @@ class NewsletterControler {
         const newsletterService = new NewsletterService();
 
         try {
-            const result = await newsletterService.execute(pageSize);
+            const result = await newsletterService.query(pageSize);
 
             return response.json(result);
         } catch (error) {

@@ -23,7 +23,7 @@ type SubscriptionData = {
 }
 
 class SubscriptionService {
-    async execute(data: SubscriptionData) {
+    async create(data: SubscriptionData) {
         const connectApi = await pagarme.client.connect({ api_key: process.env.PAGARME_CLIENT_SECRET });
         
         const subscription = await connectApi.subscriptions.create({

@@ -8,7 +8,7 @@ class CustomerController {
         const customerService = new CustomerService();
 
         try {
-            const result = await customerService.execute(data);
+            const result = await customerService.create(data);
 
             return response.status(200).json(result);
         } catch (error) {

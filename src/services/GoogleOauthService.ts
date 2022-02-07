@@ -10,7 +10,7 @@ type GoogleUserProfile = {
 }
 
 class GoogleOauthService {
-    async execute(code: string) {
+    async login(code: string) {
         const url = "https://oauth2.googleapis.com/token";
 
         const { data } = await axios.post(url, encode({
@@ -35,7 +35,7 @@ class GoogleOauthService {
 
         const costumerService = new CustomerService();
 
-        let customer = await costumerService.read(email);
+        let customer = await costumerService.query(email);
 
         if(!customer) {
             customer = await costumerService.create(name, email, picture);

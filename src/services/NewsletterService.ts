@@ -1,7 +1,7 @@
 import NewsAPI from "newsapi";
 
 class NewsletterService {
-    async execute(pageSize: string) {
+    async query(pageSize: string) {
         const newsapi = new NewsAPI(process.env.NEWS_API);
 
         const news = await newsapi.v2.topHeadlines({

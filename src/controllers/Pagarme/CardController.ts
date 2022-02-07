@@ -15,7 +15,7 @@ class CardController {
         const cardService = new CardService();
 
         try {
-            const result = await cardService.execute(card, customer_id);
+            const result = await cardService.create(card, customer_id);
 
             return response.status(200).json(result);
         } catch (error) {

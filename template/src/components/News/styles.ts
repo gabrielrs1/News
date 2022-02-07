@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
-type ScrollProps = {
-    scroll: boolean;
+type ScreenLockProps = {
+    screenLock: boolean;
 }
 
-export const BoxContent = styled.div<ScrollProps>`
+export const BoxContent = styled.div<ScreenLockProps>`
     max-width: 900px;
     margin: auto;
 
@@ -20,7 +20,7 @@ export const BoxContent = styled.div<ScrollProps>`
     }
 
     button {
-        display: ${(props) => props.scroll ? "none"  : "" };
+        display: ${(props) => props.screenLock ? "none"  : "" };
         position: fixed;
         top: 50%;
         z-index: 1;
@@ -40,10 +40,10 @@ export const BoxContent = styled.div<ScrollProps>`
     }
 `;
 
-export const Content = styled.div<ScrollProps>`
+export const Content = styled.div<ScreenLockProps>`
     text-align: justify;
 
-    filter: ${(props) => props.scroll ? "blur(0px)"  : "blur(5px)"};
+    filter: ${(props) => props.screenLock ? "blur(0px)"  : "blur(5px)"};
 
     h3 {
         margin-top: 20px;

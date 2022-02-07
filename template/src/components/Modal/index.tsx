@@ -17,7 +17,7 @@ import { cepApi } from "../../services/cep";
 function ModalComponent() {
     const { subscription } = useContext(PaymentContext);
     const { user } = useContext(AuthContext);
-    const { closeModal, modalIsOpen, stage, setStage } = useContext(ModalContext);
+    const { closeModal, modalIsOpen, screenOfModal, setScreenOfModal } = useContext(ModalContext);
     const { paid } = useContext(SubscribeContext);
 
     const [name, setName] = useState("");
@@ -59,7 +59,7 @@ function ModalComponent() {
         cpf
         });
 
-        setStage(2);
+        setScreenOfModal(2);
     }
 
     function handleSubmitAddress(event: FormEvent) {
@@ -74,7 +74,7 @@ function ModalComponent() {
         uf
         });
 
-        setStage(3);
+        setScreenOfModal(3);
     }
 
     function handleSubmitCard(event: FormEvent) {
@@ -87,20 +87,20 @@ function ModalComponent() {
         cardCVV
         });
 
-        setStage(4);
+        setScreenOfModal(4);
 
         closeModal();
     }
 
     useEffect(() => {
-        if(stage == 4) {
-            setStage(1);
+        if(screenOfModal == 4) {
+            setScreenOfModal(1);
 
             subscription(data);
             
             setData({});
         }
-    }, [stage]);
+    }, [screenOfModal]);
     
     return (
         <Modal
@@ -116,7 +116,7 @@ function ModalComponent() {
 
                 {!paid && (
                     <>
-                        { stage == 1 && (
+                        { screenOfModal == 1 && (
                             <form onSubmit={handleSubmitUser}>
                                 <TextField id="standard-basic" margin="dense" label="Nome" variant="standard" name="name" value={name} onChange={event => setName(event.target.value)} />
                                 <TextField id="standard-basic" margin="dense" label="Email" variant="standard" value={user?.email} disabled className="email" />
@@ -127,7 +127,7 @@ function ModalComponent() {
                             </form>
                         )}
 
-                        { stage == 2 && (
+                        { screenOfModal == 2 && (
                             <form onSubmit={handleSubmitAddress}>
                                 <TextField id="standard-basic" margin="dense" label="CEP" variant="standard" name="cep" value={cep} onBlur={searchCEP} onChange={event => setCep(event.target.value)} />
                                 <TextField id="standard-basic" margin="dense" label="Rua" variant="standard" name="street" value={street} onChange={event => setStreet(event.target.value)} />
@@ -140,7 +140,7 @@ function ModalComponent() {
                             </form>
                         )}
 
-                        { stage == 3 && (
+                        { screenOfModal == 3 && (
                             <form onSubmit={handleSubmitCard}>
                                 <TextField id="standard-basic" margin="dense" label="Número" variant="standard" name="cardNumber" value={cardNumber} onChange={event => setCardNumber(event.target.value)} />
                                 <TextField id="standard-basic" margin="dense" label="Nome (igual no cartão)" variant="standard" name="cardName" value={cardName} onChange={event => setCardName(event.target.value)} />

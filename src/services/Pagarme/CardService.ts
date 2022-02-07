@@ -8,7 +8,7 @@ type CardData = {
 }
 
 class CardService {
-    async execute(card: CardData, customer_id: string) {
+    async create(card: CardData, customer_id: string) {
         const hash = await pagarme.client.connect({ encryption_key: process.env.PAGARME_ENCRYPTION_KEY });
 
         const card_hash = await hash.security.encrypt({

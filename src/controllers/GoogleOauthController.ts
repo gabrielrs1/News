@@ -8,7 +8,7 @@ class GoogleOauthController {
         const googleOauthService = new GoogleOauthService();
 
         try {
-            const result = await googleOauthService.execute(code);
+            const result = await googleOauthService.login(code);
 
             return response.json(result);
         } catch (error) {

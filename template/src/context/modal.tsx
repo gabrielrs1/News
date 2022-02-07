@@ -4,10 +4,10 @@ type ModalContextData = {
     openModal: () => void;
     closeModal: () => void;
     modalIsOpen: boolean;
-    setScroll: any;
-    scroll: boolean;
-    setStage: Dispatch<SetStateAction<number>>,
-    stage: number
+    setScreenLock: any;
+    screenLock: boolean;
+    setScreenOfModal: Dispatch<SetStateAction<number>>,
+    screenOfModal: number
 }
 
 export const ModalContext = createContext({} as ModalContextData);
@@ -17,21 +17,21 @@ type AuthProvider = {
 }
 
 export function ModalProvider(props: AuthProvider) {
-    const [modalIsOpen, setIsOpen] = useState(false);
-    const [scroll, setScroll] = useState(false);
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [screenLock, setScreenLock] = useState(false);
 
-    const [stage, setStage] = useState(1);
+    const [screenOfModal, setScreenOfModal] = useState(1);
 
     function openModal() {
-        setIsOpen(true);
+        setModalIsOpen(true);
     }
 
     function closeModal() {
-        setIsOpen(false);
+        setModalIsOpen(false);
     }
 
     return (
-        <ModalContext.Provider value={{ openModal, closeModal, modalIsOpen, setScroll, scroll, setStage, stage }}>
+        <ModalContext.Provider value={{ openModal, closeModal, modalIsOpen, setScreenLock, screenLock, setScreenOfModal, screenOfModal }}>
             {props.children}
         </ModalContext.Provider>
     );
