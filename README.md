@@ -15,6 +15,11 @@
 
   # No terminal digite: cd Template
   yarn
+  
+  # Conectar o banco de dados - MongoDB
+  Na pasta src/database/db.ts você deve trocar a conexação pela qual preferir
+  
+  connect("mongodb://localhost:27017/newsletter");
 
   # Crie na raiz do projeto um .env com as seguintes informações:
   GOOGLE_CLIENT_ID=
